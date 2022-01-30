@@ -7,6 +7,20 @@ import requests
 DATA_HUB = dict()
 DATA_URL = f"http://d2l-data.s3-accelerate.amazonaws.com/"
 
+################################################################################
+
+DATA_HUB["kaggle_house_train"] = (
+    DATA_URL + "kaggle_house_pred_train.csv",
+    "585e9cc93e70b39160e7921475f9bcd7d31219ce",
+)
+
+DATA_HUB["kaggle_house_test"] = (
+    DATA_URL + "kaggle_house_pred_test.csv",
+    "fa19780a7b011d9b009e8bff8e99922a8ee2eb90",
+)
+
+################################################################################
+
 
 def download(name: str, cache_dir: str = os.path.join("../", "data")):
     """
@@ -16,7 +30,7 @@ def download(name: str, cache_dir: str = os.path.join("../", "data")):
     """
     assert name in DATA_HUB, f"{name} does not exist in {DATA_HUB}"
     url, sha1_hash = DATA_HUB[name]
-    os.makedirs(cache_dir, exists_ok=True)
+    os.makedirs(cache_dir, exist_ok=True)
     fname = os.path.join(cache_dir, url.split("/")[-1])
     if os.path.exists(fname):
         sha1 = hashlib.sha1()
