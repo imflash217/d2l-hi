@@ -25,4 +25,9 @@ print(target[:5])
 utils_nmt.show_list_len_pair_hist_nmt(
     ["source", "target"], "#tokens per sequence", "# of sequences", source, target
 )
+
+## step-4: Vocabulary
+src_vocab = utils.Vocab(source, min_frequency=2, reserved_tokens=["<pad>", "<bos>", "<eos>"])
+trg_vocab = utils.Vocab(target, min_frequency=2, reserved_tokens=["<pad>", "<bos>", "<eos>"])
+
 ## ======================================================================================##

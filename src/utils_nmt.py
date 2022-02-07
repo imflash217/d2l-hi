@@ -56,9 +56,10 @@ def tokenize_nmt(text, num_examples=None):
 
 
 def show_list_len_pair_hist_nmt(legend, xlabel, ylabel, source, target):
-    src_count = [len(l) for l in source] ## the number of tokens per sequence in source text
+    ## the number of tokens per sequence in source/target text
+    src_count = [len(l) for l in source]
     trg_count = [len(l) for l in target]
-    
+
     _, _, patches = plt.hist([src_count, trg_count])
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
@@ -67,9 +68,15 @@ def show_list_len_pair_hist_nmt(legend, xlabel, ylabel, source, target):
     plt.legend(legend)
     plt.show()
 
+
+def truncate_pad(line, time_steps, padding_token):
+    """
+    Truncates or pads the line,
+    based on whetehr its length is more or less than time_steps.
+    """
+    if len(line) > time_steps:
+        return line[:time_steps]  ## truncation
+    return line + [padding_token] * (time_steps - len(line))  ## padding
+
+
 ## ======================================================================================##
-
-
-
-
-
